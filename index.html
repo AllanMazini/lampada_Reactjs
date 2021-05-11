@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usando eventos - exercicios Lampada</title>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            }
+
+        button{
+            width: 100%;
+            font-family: Verdana, sans-serif;
+            padding: 10px;
+            background:rgb(255, 255, 255);
+            border-radius: 8px;
+         
+
+        }
+        #root {
+            width: 100%;
+            height: 100%;
+            font-family: sans-serif;
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+           
+            }
+
+        .room{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .room.light{
+            background: #FFEFBA;
+            background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);
+            background: linear-gradient(to right, #FFFFFF, #FFEFBA);
+        }
+        .room.dark{
+            background: #0F2027;
+            background: -webkit-linear-gradient(to right, #2C5364, #0F2027);
+            background: linear-gradient(to right, #2C5364, #0F2027);
+        }
+        .room.light button{ border: solid 3px #000; color: #000;}
+        .room.dark button{ border: solid 3px #000; color: #000;}
+
+
+
+    </style>
+
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+    
+        class Light extends React.Component {
+            constructor(props){
+                super(props);
+
+                this.state = {isOn: true};
+            }
+
+            toggle(){
+                const {isOn} = this.state;
+                this.setState({isOn : !isOn})
+            }
+
+            render(){
+                const {isOn} = this.state;
+                const text = (isOn) ? 'Turn Off' : 'Turn On';
+                const roomClass = (isOn) ? 'light' : 'dark';
+
+                return(
+                    <div className = {`room ${roomClass}`}>
+                        <button onClick={() => this.toggle()} >
+                        {text}
+                        </button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Light/>, document.getElementById("root"));
+    
+    </script>
+
+
+</body>
+</html>
